@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Animasi Keren</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:linear-gradient(-45deg,#0f172a,#1d4ed8,#7c3aed,#06b6d4);
+ background-size:400% 400%;
+ animation:bgMove 10s ease infinite;
+ overflow:hidden;
+}
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+.circle{
+ position:absolute;
+ border-radius:50%;
+ background:rgba(255,255,255,.08);
+ animation:float 8s infinite ease-in-out;
+}
+.circle:nth-child(1){width:180px;height:180px;top:10%;left:10%}
+.circle:nth-child(2){width:250px;height:250px;bottom:10%;right:10%;animation-delay:2s}
+.circle:nth-child(3){width:120px;height:120px;bottom:20%;left:20%;animation-delay:4s}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-30px)}
+}
+.login-box{
+ position:relative;
+ z-index:2;
+ width:100%;
+ max-width:380px;
+ padding:35px;
+ border-radius:22px;
+ background:rgba(255,255,255,.15);
+ backdrop-filter:blur(15px);
+ box-shadow:0 20px 50px rgba(0,0,0,.25);
+ animation:fadeUp 1s ease;
+}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px)}
+to{opacity:1;transform:translateY(0)}
+}
+h1{color:#fff;text-align:center;margin-bottom:10px}
+p{color:#e5e7eb;text-align:center;margin-bottom:25px;font-size:14px}
+.field{margin-bottom:18px}
+input{
+ width:100%;padding:13px 15px;
+ border:none;
+ outline:none;
+ border-radius:12px;
+ background:rgba(255,255,255,.2);
+ color:#fff;
+ font-size:14px;
+ transition:.3s;
+}
+input::placeholder{color:#e5e7eb}
+input:focus{background:rgba(255,255,255,.3);transform:scale(1.03)}
+button{
+ width:100%;padding:13px;
+ border:none;
+ border-radius:12px;
+ background:#fff;
+ color:#111827;
+ font-weight:bold;
+ cursor:pointer;
+ transition:.3s;
+}
+button:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.2)}
+.footer{text-align:center;margin-top:18px;color:#fff;font-size:14px}
+a{color:#fff;text-decoration:none;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="login-box">
+<h1>Welcome Back</h1>
+<p>Silakan login ke akun Anda</p>
+<form action="login.php" method="POST">
+<div class="field">
+<input type="email" name="email" placeholder="Masukkan Email" required>
+</div>
+<div class="field">
+<input type="password" name="password" placeholder="Masukkan Password" required>
+</div>
+<button type="submit">Login Sekarang</button>
+</form>
+<div class="footer">Belum punya akun? <a href="register.html">Daftar</a></div>
+</div>
+</body>
+</html>
