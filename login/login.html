@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login System Full</title>
+<title>Login Redirect</title>
 
 <style>
 *{
@@ -18,12 +18,12 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#00ffff,#009999);
+    background:linear-gradient(135deg,#00ffff,#008b8b);
 }
 
 .box{
     width:350px;
-    background:white;
+    background:#fff;
     padding:30px;
     border-radius:15px;
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
@@ -52,7 +52,6 @@ button{
     border-radius:8px;
     font-weight:bold;
     cursor:pointer;
-    transition:0.3s;
 }
 
 button:hover{
@@ -66,20 +65,19 @@ p{
 
 a{
     color:#008b8b;
-    cursor:pointer;
     font-weight:bold;
+    cursor:pointer;
     text-decoration:none;
-}
-
-.hidden{
-    display:none;
 }
 
 .msg{
     text-align:center;
-    margin-bottom:10px;
     color:red;
-    font-size:14px;
+    margin-bottom:10px;
+}
+
+.hidden{
+    display:none;
 }
 </style>
 </head>
@@ -88,8 +86,9 @@ a{
 <div class="box">
 
 <!-- LOGIN -->
-<div id="loginPage">
+<div id="loginBox">
 <h2>Login</h2>
+
 <div class="msg" id="loginMsg"></div>
 
 <input type="text" id="loginUser" placeholder="Username">
@@ -101,8 +100,9 @@ a{
 </div>
 
 <!-- REGISTER -->
-<div id="registerPage" class="hidden">
+<div id="registerBox" class="hidden">
 <h2>Daftar</h2>
+
 <div class="msg" id="regMsg"></div>
 
 <input type="text" id="regUser" placeholder="Username">
@@ -113,36 +113,25 @@ a{
 <p>Sudah punya akun? <a onclick="showLogin()">Login</a></p>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboardPage" class="hidden">
-<h2>Dashboard</h2>
-<p style="margin-bottom:20px;">Selamat datang, <span id="namaUser"></span></p>
-
-<button onclick="logout()">Logout</button>
-</div>
-
 </div>
 
 <script>
 
-const loginPage = document.getElementById("loginPage");
-const registerPage = document.getElementById("registerPage");
-const dashboardPage = document.getElementById("dashboardPage");
-
 function showRegister(){
-    loginPage.classList.add("hidden");
-    registerPage.classList.remove("hidden");
+    loginBox.classList.add("hidden");
+    registerBox.classList.remove("hidden");
 }
 
 function showLogin(){
-    registerPage.classList.add("hidden");
-    loginPage.classList.remove("hidden");
+    registerBox.classList.add("hidden");
+    loginBox.classList.remove("hidden");
 }
 
+/* REGISTER */
 function register(){
 
-    let user = document.getElementById("regUser").value;
-    let pass = document.getElementById("regPass").value;
+    let user = regUser.value.trim();
+    let pass = regPass.value.trim();
 
     if(user=="" || pass==""){
         regMsg.innerText = "Isi semua data!";
@@ -152,14 +141,15 @@ function register(){
     localStorage.setItem("username", user);
     localStorage.setItem("password", pass);
 
-    alert("Registrasi berhasil!");
+    alert("Akun berhasil dibuat!");
     showLogin();
 }
 
+/* LOGIN + REDIRECT */
 function login(){
 
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
+    let user = loginUser.value.trim();
+    let pass = loginPass.value.trim();
 
     let savedUser = localStorage.getItem("username");
     let savedPass = localStorage.getItem("password");
@@ -168,40 +158,20 @@ function login(){
 
         localStorage.setItem("isLogin","true");
 
-        masukDashboard();
+        alert("Login berhasil!");
+
+        /* redirect ke halaman utama */
+        window.location.href = "index.html";
 
     }else{
-        loginMsg.innerText = "Username / Password salah!";
+        loginMsg.innerText = "Username atau Password salah!";
     }
 }
 
-function masukDashboard(){
-
-    loginPage.classList.add("hidden");
-    registerPage.classList.add("hidden");
-    dashboardPage.classList.remove("hidden");
-
-    namaUser.innerText = localStorage.getItem("username");
-}
-
-function logout(){
-
-    localStorage.removeItem("isLogin");
-
-    dashboardPage.classList.add("hidden");
-    loginPage.classList.remove("hidden");
-}
-
+/* auto isi */
 window.onload = function(){
-
-    // auto isi username password
     loginUser.value = localStorage.getItem("username") || "";
     loginPass.value = localStorage.getItem("password") || "";
-
-    // kalau sudah login langsung dashboard
-    if(localStorage.getItem("isLogin") === "true"){
-        masukDashboard();
-    }
 }
 
 </script>
