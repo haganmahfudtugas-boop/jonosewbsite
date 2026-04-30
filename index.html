@@ -15,10 +15,12 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
 <style>
-
-/* smooth */
 html{
 scroll-behavior:smooth;
+}
+
+body{
+overflow-x:hidden;
 }
 
 /* loading */
@@ -33,36 +35,67 @@ z-index:99999;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:28px;
+font-size:30px;
 font-weight:bold;
-color:#fff;
+color:white;
+transition:0.5s;
 }
 
-/* fade animasi */
-.service-item,
-.testimonials-item,
-.left-text,
-.wrapper,
-.first-content{
+/* animasi */
+.fade-up{
 opacity:0;
-transform:translateY(50px);
-transition:0.8s ease;
+transform:translateY(40px);
+transition:.8s ease;
 }
 
-/* active nav */
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* navbar aktif */
 .fixed-side-navbar .nav-link.active span{
 color:#00ffff !important;
 font-weight:bold;
 }
 
+/* section cerita */
+.story-section{
+padding:100px 0;
+background:linear-gradient(135deg,#012b33,#014d59);
+color:white;
+text-align:center;
+}
+
+.story-box{
+max-width:900px;
+margin:auto;
+padding:40px;
+background:rgba(255,255,255,.08);
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+backdrop-filter:blur(10px);
+}
+
+.story-box h2{
+font-weight:700;
+margin-bottom:25px;
+}
+
+.story-box p{
+line-height:1.9;
+font-size:17px;
+margin-bottom:18px;
+}
+
+/* tombol */
 .primary-button a{
-transition:0.3s;
+transition:.3s;
 }
 
 .primary-button a:hover{
 transform:scale(1.05);
 }
-
 </style>
 </head>
 
@@ -70,21 +103,21 @@ transform:scale(1.05);
 
 <div id="loader">Memuat Website...</div>
 
-<!-- Navbar -->
+<!-- NAVBAR -->
 <div class="fixed-side-navbar">
 <ul class="nav flex-column">
 <li class="nav-item"><a class="nav-link active" href="#home"><span>Awalan</span></a></li>
 <li class="nav-item"><a class="nav-link" href="#services"><span>Pelayanan</span></a></li>
 <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Portofolio</span></a></li>
-<li class="nav-item"><a class="nav-link" href="#our-story"><span>Cerita</span></a></li>
+<li class="nav-item"><a class="nav-link" href="#our-story"><span>Cerita Kita</span></a></li>
 <li class="nav-item"><a class="nav-link" href="#contact-us"><span>Kontak</span></a></li>
 </ul>
 </div>
 
-<!-- Home -->
+<!-- HOME -->
 <div class="parallax-content baner-content" id="home">
 <div class="container">
-<div class="first-content">
+<div class="first-content fade-up">
 <h1>HTML</h1>
 <span><em>Bersama Hagan</em></span>
 <div class="primary-button">
@@ -94,26 +127,26 @@ transform:scale(1.05);
 </div>
 </div>
 
-<!-- Services -->
+<!-- SERVICES -->
 <div class="service-content" id="services">
 <div class="container">
 <div class="row">
 
 <div class="col-md-4">
-<div class="left-text">
+<div class="left-text fade-up">
 <h4>Penjelasan</h4>
 <div class="line-dec"></div>
 
 <p>
-Belajar HTML bersama dengan cara mudah, santai, dan cepat paham hingga bisa membuat website sendiri.
+Belajar HTML bersama dari dasar sampai mahir membuat website modern.
 <a href="login.html">Masuk Website</a>
 </p>
 
 <ul>
-<li>- Belajar Dasar HTML</li>
-<li>- Belajar CSS</li>
-<li>- Belajar JavaScript</li>
-<li>- Jadi Pro</li>
+<li>- HTML Dasar</li>
+<li>- CSS Modern</li>
+<li>- JavaScript</li>
+<li>- Jadi Profesional</li>
 </ul>
 
 <div class="primary-button">
@@ -127,34 +160,34 @@ Belajar HTML bersama dengan cara mudah, santai, dan cepat paham hingga bisa memb
 <div class="row">
 
 <div class="col-md-6">
-<div class="service-item">
-<h4>Indonesia Jaya</h4>
+<div class="service-item fade-up">
+<h4>Desain Modern</h4>
 <div class="line-dec"></div>
-<p>Website modern dengan tampilan bersih dan nyaman dipandang.</p>
+<p>Tampilan bersih, elegan, dan nyaman dipandang.</p>
 </div>
 </div>
 
 <div class="col-md-6">
-<div class="service-item">
-<h4>Unik & Kreatif</h4>
+<div class="service-item fade-up">
+<h4>Kreatif</h4>
 <div class="line-dec"></div>
-<p>Desain berbeda dari yang lain dengan sentuhan modern.</p>
+<p>Ide unik yang menjadikan website berbeda.</p>
 </div>
 </div>
 
 <div class="col-md-6">
-<div class="service-item">
+<div class="service-item fade-up">
 <h4>Kerja Tim</h4>
 <div class="line-dec"></div>
-<p>Kolaborasi yang baik menghasilkan karya luar biasa.</p>
+<p>Kolaborasi menghasilkan karya terbaik.</p>
 </div>
 </div>
 
 <div class="col-md-6">
-<div class="service-item">
+<div class="service-item fade-up">
 <h4>Dukungan 24/7</h4>
 <div class="line-dec"></div>
-<p>Kami selalu siap membantu kapan saja.</p>
+<p>Selalu siap membantu kapan saja.</p>
 </div>
 </div>
 
@@ -165,19 +198,19 @@ Belajar HTML bersama dengan cara mudah, santai, dan cepat paham hingga bisa memb
 </div>
 </div>
 
-<!-- Portfolio -->
+<!-- PORTFOLIO -->
 <div class="parallax-content projects-content" id="portfolio">
 <div class="container">
 <div class="row">
 <div class="col-md-12">
 
-<div id="owl-testimonials" class="owl-carousel owl-theme">
+<div id="owl-testimonials" class="owl-carousel owl-theme fade-up">
 
 <div class="item">
 <div class="testimonials-item">
 <img src="img/1st-item.jpg">
 <div class="text-content">
-<h4>Buku Keren</h4>
+<h4>Buku Catatan</h4>
 <span>Rp18.000</span>
 </div>
 </div>
@@ -187,7 +220,7 @@ Belajar HTML bersama dengan cara mudah, santai, dan cepat paham hingga bisa memb
 <div class="testimonials-item">
 <img src="img/2nd-item.jpg">
 <div class="text-content">
-<h4>Dekorasi</h4>
+<h4>Dekorasi Antik</h4>
 <span>Rp27.000</span>
 </div>
 </div>
@@ -220,46 +253,50 @@ Belajar HTML bersama dengan cara mudah, santai, dan cepat paham hingga bisa memb
 </div>
 </div>
 
-<!-- Story -->
-<div class="tabs-content" id="our-story">
+<!-- CERITA KITA -->
+<section class="story-section" id="our-story">
 <div class="container">
-<div class="row">
-<div class="col-md-8 mx-auto">
+<div class="story-box fade-up">
 
-<div class="wrapper">
+<h2>Cerita Perjalanan Kami</h2>
 
-<h3 style="text-align:center;color:white;">Cerita Perjalanan Kami</h3>
-<p style="text-align:center;color:white;">
-Dari nol hingga menjadi website modern dan elegan.
+<p>
+Kami memulai semuanya dari rasa ingin tahu. Dari sekadar mencoba menulis baris kode HTML pertama,
+hingga memahami bagaimana sebuah website dibangun dengan rapi dan menarik.
+</p>
+
+<p>
+Setiap kesalahan menjadi pelajaran, setiap tantangan menjadi pengalaman.
+Sedikit demi sedikit kami berkembang, mempelajari desain, animasi, dan struktur website modern.
+</p>
+
+<p>
+Kini kami terus melangkah untuk menciptakan karya digital yang lebih baik,
+lebih indah, dan lebih bermanfaat bagi banyak orang.
 </p>
 
 </div>
+</div>
+</section>
 
-</div>
-</div>
-</div>
-</div>
-
-<!-- Contact -->
+<!-- KONTAK -->
 <div class="parallax-content contact-content" id="contact-us">
 <div class="container">
 <div class="row">
 
 <div class="col-md-6">
-<div class="contact-form">
-
+<div class="contact-form fade-up">
 <form>
 <input type="text" class="form-control" placeholder="Nama Anda..." required>
 <input type="email" class="form-control" placeholder="Email Anda..." required>
 <textarea rows="6" class="form-control" placeholder="Pesan Anda..." required></textarea>
 <button type="submit" class="btn">Kirim Pesan</button>
 </form>
-
 </div>
 </div>
 
 <div class="col-md-6">
-<div class="map">
+<div class="map fade-up">
 <iframe src="https://maps.google.com/maps?q=jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"
 width="100%" height="390" frameborder="0"></iframe>
 </div>
@@ -269,7 +306,7 @@ width="100%" height="390" frameborder="0"></iframe>
 </div>
 </div>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
 <div class="container">
 <div class="row">
@@ -291,30 +328,32 @@ width="100%" height="390" frameborder="0"></iframe>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
 
-<!-- Loader -->
+<!-- loader -->
 <script>
 window.onload=function(){
 setTimeout(()=>{
+document.getElementById("loader").style.opacity="0";
+setTimeout(()=>{
 document.getElementById("loader").style.display="none";
-},1000);
+},500);
+},800);
 }
 </script>
 
-<!-- Smooth Scroll -->
+<!-- smooth scroll -->
 <script>
 $(document).ready(function(){
 
 $(".fixed-side-navbar a, .primary-button a").on("click", function(e){
 
 if(this.hash !== ""){
-
 e.preventDefault();
 
 let target=this.hash;
 
-$("html, body").stop().animate({
+$("html, body").animate({
 scrollTop:$(target).offset().top
-},1400,"swing");
+},1300);
 
 }
 
@@ -323,49 +362,18 @@ scrollTop:$(target).offset().top
 });
 </script>
 
-<!-- Active Navbar -->
-<script>
-$(window).scroll(function(){
-
-let scroll=$(window).scrollTop();
-
-$("div[id]").each(function(i){
-
-if($(this).position().top <= scroll + 150){
-
-$(".fixed-side-navbar .nav-link.active").removeClass("active");
-
-$(".fixed-side-navbar .nav-link").eq(i).addClass("active");
-
+<!-- fade scroll -->
+function reveal(){
+document.querySelectorAll('.fade-up').forEach(el=>{
+let top=el.getBoundingClientRect().top;
+if(top < window.innerHeight - 80){
+el.classList.add('show');
+}
+});
 }
 
-});
-
-});
-</script>
-
-<!-- Fade In -->
-<script>
-$(window).on("scroll load",function(){
-
-$(".service-item,.testimonials-item,.left-text,.wrapper,.first-content").each(function(){
-
-let top=$(this).offset().top;
-let win=$(window).scrollTop();
-let h=$(window).height();
-
-if(top < win + h - 80){
-
-$(this).css({
-opacity:"1",
-transform:"translateY(0px)"
-});
-
-}
-
-});
-
-});
+window.addEventListener('scroll',reveal);
+window.addEventListener('load',reveal);
 </script>
 
 </body>
