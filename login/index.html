@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login JonoWebsite</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#00ffff,#007777);
+overflow:hidden;
+}
+
+/* box */
+.login-box{
+width:400px;
+padding:35px;
+border-radius:20px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(18px);
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+border:1px solid rgba(255,255,255,.2);
+animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+h2{
+text-align:center;
+color:white;
+margin-bottom:10px;
+font-size:30px;
+}
+
+p{
+text-align:center;
+color:#eaffff;
+margin-bottom:25px;
+font-size:14px;
+}
+
+/* form */
+.form-group{
+margin-bottom:16px;
+}
+
+label{
+display:block;
+color:white;
+font-size:14px;
+margin-bottom:6px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:12px;
+background:rgba(255,255,255,.18);
+color:white;
+font-size:15px;
+}
+
+input::placeholder{
+color:#eaffff;
+}
+
+input:focus{
+background:rgba(255,255,255,.28);
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:white;
+color:#008b8b;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+margin-top:5px;
+}
+
+button:hover{
+transform:translateY(-3px);
+}
+
+.msg{
+text-align:center;
+margin-bottom:12px;
+min-height:22px;
+color:#ffecec;
+font-size:14px;
+}
+
+.extra{
+text-align:center;
+margin-top:18px;
+color:#eaffff;
+font-size:13px;
+}
+
+.extra a{
+color:white;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>🔐 Login</h2>
+<p>Masuk ke akun JonoWebsite</p>
+
+<div class="msg" id="msg"></div>
+
+<form onsubmit="event.preventDefault(); login();">
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" id="username" placeholder="Masukkan username">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" id="password" placeholder="Masukkan password">
+</div>
+
+<button type="submit">MASUK</button>
+
+</form>
+
+<div class="extra">
+Belum punya akun?
+<a onclick="register()">Daftar</a>
+</div>
+
+</div>
+
+<script>
+
+const expiredMs = 7 * 24 * 60 * 60 * 1000;
+
+function encrypt(text){
+return btoa(text);
+}
+
+function register(){
+
+let user = prompt("Masukkan Username:");
+let pass = prompt("Masukkan Password:");
+
+if(!user || !pass) return;
+
+localStorage.setItem("user", user);
+localStorage.setItem("pass", encrypt(pass));
+
+alert("Akun berhasil dibuat.");
+
+}
+
+function login(){
+
+let user = document.getElementById("username").value.trim();
+let pass = document.getElementById("password").value.trim();
+
+let saveUser = localStorage.getItem("user");
+let savePass = localStorage.getItem("pass");
+
+if(user === saveUser && encrypt(pass) === savePass){
+
+msg.style.color="#d4ffe5";
+msg.innerText="Login berhasil...";
+
+localStorage.setItem("isLogin","true");
+localStorage.setItem("expired", Date.now()+expiredMs);
+
+setTimeout(()=>{
+window.location.href="index.html";
+},1000);
+
+}else{
+
+msg.style.color="#ffdede";
+msg.innerText="Username / Password salah";
+
+}
+
+}
+
+window.onload=function(){
+
+let login = localStorage.getItem("isLogin");
+let exp = localStorage.getItem("expired");
+
+if(login==="true" && Date.now() < exp){
+window.location.href="index.html";
+}
+
+}
+
+</script>
+
+</body>
+</html>
