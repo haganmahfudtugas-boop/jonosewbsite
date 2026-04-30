@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Redirect</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#00ffff,#008b8b);
+}
+
+.box{
+    width:350px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    color:#008b8b;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #00cccc;
+    border-radius:8px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#00ffff;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00dddd;
+}
+
+p{
+    text-align:center;
+    margin-top:15px;
+}
+
+a{
+    color:#008b8b;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.msg{
+    text-align:center;
+    color:red;
+    margin-bottom:10px;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<!-- LOGIN -->
+<div id="loginBox">
+<h2>Login</h2>
+
+<div class="msg" id="loginMsg"></div>
+
+<input type="text" id="loginUser" placeholder="Username">
+<input type="password" id="loginPass" placeholder="Password">
+
+<button onclick="login()">Masuk</button>
+
+<p>Belum punya akun? <a onclick="showRegister()">Daftar</a></p>
+</div>
+
+<!-- REGISTER -->
+<div id="registerBox" class="hidden">
+<h2>Daftar</h2>
+
+<div class="msg" id="regMsg"></div>
+
+<input type="text" id="regUser" placeholder="Username">
+<input type="password" id="regPass" placeholder="Password">
+
+<button onclick="register()">Daftar</button>
+
+<p>Sudah punya akun? <a onclick="showLogin()">Login</a></p>
+</div>
+
+</div>
+
+<script>
+
+function showRegister(){
+    loginBox.classList.add("hidden");
+    registerBox.classList.remove("hidden");
+}
+
+function showLogin(){
+    registerBox.classList.add("hidden");
+    loginBox.classList.remove("hidden");
+}
+
+/* REGISTER */
+function register(){
+
+    let user = regUser.value.trim();
+    let pass = regPass.value.trim();
+
+    if(user=="" || pass==""){
+        regMsg.innerText = "Isi semua data!";
+        return;
+    }
+
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pass);
+
+    alert("Akun berhasil dibuat!");
+    showLogin();
+}
+
+/* LOGIN + REDIRECT */
+function login(){
+
+    let user = loginUser.value.trim();
+    let pass = loginPass.value.trim();
+
+    let savedUser = localStorage.getItem("username");
+    let savedPass = localStorage.getItem("password");
+
+    if(user === savedUser && pass === savedPass){
+
+        localStorage.setItem("isLogin","true");
+
+        alert("Login berhasil!");
+
+        /* redirect ke halaman utama */
+        window.location.href = "index.html";
+
+    }else{
+        loginMsg.innerText = "Username atau Password salah!";
+    }
+}
+
+/* auto isi */
+window.onload = function(){
+    loginUser.value = localStorage.getItem("username") || "";
+    loginPass.value = localStorage.getItem("password") || "";
+}
+
+</script>
+
+</body>
+</html>
